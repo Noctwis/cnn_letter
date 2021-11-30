@@ -8,7 +8,7 @@ model = tf.keras.models.load_model('model_pourri2.h5')
 
 def import_and_predict(image_data, model):
     
-        size = (28,28)    
+        size = (75,75)    
         image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
         image = image.convert('RGB')
         image = np.asarray(image)
