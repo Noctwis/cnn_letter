@@ -13,13 +13,15 @@ def import_and_predict(image_data, model):
         image = image.convert('RGB')
         image = np.asarray(image)
         image = (image.astype(np.float32) / 255.0)
-        image = pd.DataFrame(image)
+        img_reshape = image[np.newaxis,...]
+        image2 = pd.DataFrame(img_reshape)
+        image2_reshape = image2.values.reshape(-1,28,28,1)
 
-        img_reshape = image.values.reshape(-1,28,28,1)
-
-        prediction = model.predict(img_reshape)
+        prediction = model.predict(image2_reshape)
+        res=np.argmax(prediction,axis=1) 
         
-        return prediction
+        
+        return res
 
 model = tf.keras.models.load_model('MyModel_h5.h5')
 
