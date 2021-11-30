@@ -13,7 +13,7 @@ def import_and_predict(image_data, model):
         image = image.convert('RGB')
         image = np.asarray(image)
         image = (image.astype(np.float32) / 255.0)
-        image2_reshape = img_reshape.reshape(-1,28,28,1)
+        image2_reshape = image.reshape(-1,28,28,1)
 
         prediction = model.predict(image2_reshape)
         res=np.argmax(prediction,axis=1) 
