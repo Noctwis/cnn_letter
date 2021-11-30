@@ -10,9 +10,9 @@ def import_and_predict(image_data, model):
         size = (75,75)    
         image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
         image = image.convert('RGB')
-        #image = np.asarray(image)
-        #image = (image.astype(np.float32) / 255.0)
-        image = image / 255
+        image = np.asarray(image)
+        image = (image.astype(np.float32) / 255.0)
+        image = pd.DataFrame(image)
 
         img_reshape = image.values.reshape(-1,28,28,1)
 
