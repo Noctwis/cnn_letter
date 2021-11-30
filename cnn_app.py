@@ -19,7 +19,7 @@ def import_and_predict(image_data, model):
         
         return prediction
 
-model = tf.keras.models.load_model('my_model.hdf5')
+model = tf.keras.models.load_model('MyModel_h5.h5')
 
 st.write("""
          # Letter prédiction
@@ -31,7 +31,7 @@ st.write("This is a simple image classification web app to predict letter")
 file = st.file_uploader("Please upload an image file", type=["jpg", "png"])
 #
 if file is None:
-    st.text("You haven't uploaded an image file")
+    st.text("You haven't uploaded an image file(jpg or png)")
 else:
     image = Image.open(file)
     st.image(image, use_column_width=True)
@@ -93,4 +93,4 @@ else:
         st.write("")
     
     #st.text("Probability (0: Not sick, 1: Sick)")
-    st.write(prediction)
+    #st.write(prediction)
