@@ -10,8 +10,9 @@ def import_and_predict(image_data, model):
         size = (75,75)    
         image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
         image = image.convert('RGB')
-        image = np.asarray(image)
-        image = (image.astype(np.float32) / 255.0)
+        #image = np.asarray(image)
+        #image = (image.astype(np.float32) / 255.0)
+        image = image / 255
 
         img_reshape = image.values.reshape(-1,28,28,1)
 
@@ -75,22 +76,19 @@ else:
         st.write("R")
     elif np.argmax(prediction) == 18:
         st.write("S")
-    elif np.argmax(prediction) == 18:
+    elif np.argmax(prediction) == 19:
         st.write("T")
-    elif np.argmax(prediction) == 18:
+    elif np.argmax(prediction) == 20:
         st.write("U")
-    elif np.argmax(prediction) == 18:
+    elif np.argmax(prediction) == 21:
         st.write("V")
-    elif np.argmax(prediction) == 18:
+    elif np.argmax(prediction) == 22:
         st.write("W")
-    elif np.argmax(prediction) == 18:
+    elif np.argmax(prediction) == 23:
         st.write("X")
-    elif np.argmax(prediction) == 18:
+    elif np.argmax(prediction) == 24:
         st.write("Y")
-    elif np.argmax(prediction) == 18:
+    elif np.argmax(prediction) == 25:
         st.write("Z")
     else:
         st.write("")
-    
-    #st.text("Probability (0: Not sick, 1: Sick)")
-    #st.write(prediction)
