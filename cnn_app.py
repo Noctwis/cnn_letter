@@ -2,6 +2,7 @@ import numpy as np
 import streamlit as st
 from PIL import Image, ImageOps
 import tensorflow as tf
+import pandas as pd
 
 model = tf.keras.models.load_model('MyModel_h5.h5')
 
