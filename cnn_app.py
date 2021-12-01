@@ -94,4 +94,4 @@ else:
     else:
         st.write("")
 
-    #st.write(prediction)
+    st.write(prediction)
