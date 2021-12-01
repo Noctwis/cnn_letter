@@ -16,10 +16,10 @@ def import_and_predict(image_data, model):
         image2_reshape = image.reshape(-1,28,28,1)
 
         prediction = model.predict(image2_reshape)
-        res=np.argmax(prediction,axis=1) 
+        res=np.argmax(prediction,axis=2) 
         
         
-        return prediction
+        return res
 
 model = tf.keras.models.load_model('model_O.h5')
 
