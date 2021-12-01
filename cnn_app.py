@@ -16,7 +16,7 @@ def import_and_predict(image_data, model):
         image2_reshape = image.reshape(-1,28,28,1)
 
         prediction = model.predict(image2_reshape)
-        res=np.argmax(prediction,axis=0) 
+        res=np.argmax(prediction,axis=1) 
         
         
         return res
