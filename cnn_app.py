@@ -19,7 +19,7 @@ def import_and_predict(image_data, model):
         res=np.argmax(prediction,axis=1) 
         
         
-        return res
+        return prediction
 
 model = tf.keras.models.load_model('model_O.h5')
 
@@ -93,3 +93,5 @@ else:
         st.write("Z")
     else:
         st.write("")
+
+    st.write(prediction)
