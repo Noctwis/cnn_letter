@@ -3,6 +3,7 @@ import streamlit as st
 from PIL import Image, ImageOps
 import tensorflow as tf
 import pandas as pd
+import cv2
 
 model = tf.keras.models.load_model('cnn.h5')
 
@@ -12,6 +13,7 @@ def import_and_predict(image_data, model):
         image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
         image = image.rotate(90)
         image = image.convert('RGB')
+        image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
         image = np.asarray(image)
         image = (image.astype(np.float32) / 255.0)
         image2_reshape = image.reshape(-1,28,28,1)
