@@ -7,6 +7,14 @@ import torch
 import torch.nn as nn
 import torchvision.transforms as T
 import torch.nn.functional as F
+from numpy.core.defchararray import title
+import streamlit as st
+from streamlit_drawable_canvas import st_canvas
+from torch_utils import transform_image,  get_prediction
+from PIL import Image
+import numpy as np
+import pandas as pd
+import time
 #import cv2
 
 class EMNIST(nn.Module):
@@ -78,18 +86,18 @@ file = st.file_uploader("Please upload an image file", type=["jpg", "png"])
 if file is None:
     st.text("You haven't uploaded an image file(jpg or png)")
 else:
+    def predict(image):
+    image = Image.fromarray((image[:, :, 0]).astype(np.uint8))
+    image = image.resize((28, 28))
+    tensor = transform_image(image)
+    prediction = get_prediction(tensor)
+        return prediction
+
     image = Image.open(file)
     st.image(image, use_column_width=True)
     prediction = predict(image)
     
-from numpy.core.defchararray import title
-import streamlit as st
-from streamlit_drawable_canvas import st_canvas
-from torch_utils import transform_image,  get_prediction
-from PIL import Image
-import numpy as np
-import pandas as pd
-import time
+
 
 #st.set_page_config(
 #    page_title="Handwritten Letters Classifier",
