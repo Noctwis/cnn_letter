@@ -73,10 +73,10 @@ def import_and_predict(image_data, model):
         #image2_reshape = image.reshape(-1,28,28,1)
 
         prediction2 = get_prediction(image2_reshape)
-        #res=np.argmax(prediction,axis=1) 
+        res=np.argmax(prediction,axis=1) 
         
         
-        return prediction2
+        return res
 #mettre prediction a la place de res pour avoir les pourcentages
 
 model = load_checkpoint('model.pth')
