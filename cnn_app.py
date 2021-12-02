@@ -91,6 +91,7 @@ st.write("This is a simple image classification web app to predict letter")
 file = st.file_uploader("Please upload an image file", type=["jpg", "png"])
 
 def predict(image):
+    image = np.asarray(image)
     image = Image.fromarray((image[:, :, 0]).astype(np.uint8))
     image = image.resize((28, 28))
     tensor = transform_image(image)
