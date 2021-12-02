@@ -96,7 +96,7 @@ else:
     image = Image.open(file)
     st.image(image, use_column_width=True)
     prediction = import_and_predict(image,model)
-    st.write(prediction)
+    st.write(res)
     
 
 
