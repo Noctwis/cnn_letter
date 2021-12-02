@@ -3,4 +3,4 @@ streamlit==0.62.0
 numpy==1.16.6
 pillow==6.2.0
 pandas==0.25.3
-cv2==4.4.0
+opencv-python==4.4.0
