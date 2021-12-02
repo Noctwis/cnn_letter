@@ -52,10 +52,10 @@ import numpy as np
 import pandas as pd
 import time
 
-st.set_page_config(
-    page_title="Handwritten Letters Classifier",
-    page_icon=":pencil:",
-)
+#st.set_page_config(
+#    page_title="Handwritten Letters Classifier",
+#    page_icon=":pencil:",
+#)
 
 
 hide_streamlit_style = """
