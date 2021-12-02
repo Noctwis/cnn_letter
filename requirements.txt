@@ -4,5 +4,5 @@ numpy==1.16.6
 pillow==6.2.0
 pandas==0.25.3
 streamlit-drawable-canvas==0.3.0
-torch==1.6.0+cpu
-torchvision==0.7.0+cpu
+torch==1.6.0
+torchvision==0.7.0
