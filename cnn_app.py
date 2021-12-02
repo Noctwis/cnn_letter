@@ -5,6 +5,13 @@ import tensorflow as tf
 import pandas as pd
 #import cv2
 
+def load_checkpoint(filepath):  # loading the pretrained weights
+    model = EMNIST()
+    model.load_state_dict(torch.load(filepath, map_location='cpu'))
+    model.eval()
+
+    return model
+
 model = load_checkpoint('model.pth')
 
 def import_and_predict(image_data, model):
