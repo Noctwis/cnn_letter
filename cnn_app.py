@@ -3,6 +3,7 @@ import streamlit as st
 from PIL import Image, ImageOps
 import tensorflow as tf
 import pandas as pd
+import EMNIST from torch_utils.py
 #import cv2
 
 def load_checkpoint(filepath):  # loading the pretrained weights
