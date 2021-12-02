@@ -3,6 +3,10 @@ import streamlit as st
 from PIL import Image, ImageOps
 import tensorflow as tf
 import pandas as pd
+import torch
+import torch.nn as nn
+import torchvision.transforms as T
+import torch.nn.functional as F
 #import cv2
 
 class EMNIST(nn.Module):
