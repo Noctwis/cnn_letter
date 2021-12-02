@@ -65,7 +65,7 @@ def import_and_predict(image_data, model):
         image = (image.astype(np.float32) / 255.0)
         image2_reshape = image.reshape(-1,28,28,1)
 
-        prediction2 = get_prediction(tensor)
+        prediction2 = get_prediction(image2_reshape)
         #res=np.argmax(prediction,axis=1) 
         
         
