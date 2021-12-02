@@ -90,6 +90,13 @@ st.write("This is a simple image classification web app to predict letter")
 
 file = st.file_uploader("Please upload an image file", type=["jpg", "png"])
 
+def predict(image):
+    image = Image.fromarray((image[:, :, 0]).astype(np.uint8))
+    image = image.resize((28, 28))
+    tensor = transform_image(image)
+    prediction = get_prediction(tensor)
+    return prediction
+
 def np_to_df(outputs):  # Create a 2D array for the dataframe instead of a 1D array
     length = outputs.shape[0]  # Total outputs
     arr = []
@@ -104,7 +111,7 @@ if file is None:
 else:
     image = Image.open(file)
     st.image(image, use_column_width=True)
-    outputs = import_and_predict(image,model)
+    outputs = predict(image)
     ind_max = np.where(outputs == max(outputs))[0][0]  # Index of the max element
     # Converting index to equivalent letter
     progress_bar = st.progress(0)
