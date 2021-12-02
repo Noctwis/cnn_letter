@@ -38,9 +38,9 @@ canvas_result = st_canvas(
 # Do something interesting with the image data and paths
 if canvas_result.image_data is not None:
     #st.image(canvas_result.image_data)
-    image = canvas_result.image_data
-    image1 = image.copy()
-    image1 = image1.rotate(270) 
+    image_data = image_data.rotate(90)
+    image = canvas_result.image_data 
+    image1 = image.copy()  
     image1 = image1.astype('uint8')
     image1 = cv2.cvtColor(image1,cv2.COLOR_BGR2GRAY)
     
