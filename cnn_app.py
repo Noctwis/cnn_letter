@@ -3,8 +3,35 @@ import streamlit as st
 from PIL import Image, ImageOps
 import tensorflow as tf
 import pandas as pd
-import EMNIST from torch_utils.py
 #import cv2
+
+class EMNIST(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.network = nn.Sequential(
+            nn.Conv2d(1, 8, kernel_size=3, stride=1, padding=1, bias=True),
+            nn.ReLU(inplace=True),
+            nn.BatchNorm2d(8),
+            nn.Conv2d(8, 32, kernel_size=3, stride=1, padding=1, bias=True),
+            nn.ReLU(inplace=True),
+            nn.BatchNorm2d(32),
+            nn.MaxPool2d(2),  # 32*14*14
+
+            nn.Conv2d(32, 128, kernel_size=3, stride=1, padding=1, bias=True),
+            nn.ReLU(inplace=True),
+            nn.BatchNorm2d(128),
+            nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1, bias=True),
+            nn.ReLU(inplace=True),
+            nn.BatchNorm2d(256),
+            nn.MaxPool2d(2),  # 256*7*7
+
+            nn.Flatten(),
+            nn.Linear(256*7*7, 512),
+            nn.ReLU(),
+            nn.Linear(512, 32),
+            nn.ReLU(),
+            nn.Linear(32, 26)
+        )
 
 def load_checkpoint(filepath):  # loading the pretrained weights
     model = EMNIST()
