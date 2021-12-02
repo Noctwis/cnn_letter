@@ -5,7 +5,7 @@ import tensorflow as tf
 import pandas as pd
 #import cv2
 
-model = tf.keras.models.load_model('MyModel_h5.h5')
+model = tf.keras.models.load_model('model_O.h5')
 
 def import_and_predict(image_data, model):
     
@@ -25,7 +25,7 @@ def import_and_predict(image_data, model):
         return res 
 #mettre prediction a la place de res pour avoir les pourcentages
 
-model = tf.keras.models.load_model('MyModel_h5.h5')
+model = tf.keras.models.load_model('model_O.h5')
 
 st.write("""
          # Letter prédiction
