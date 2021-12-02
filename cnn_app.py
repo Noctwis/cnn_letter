@@ -89,6 +89,15 @@ st.write("""
 st.write("This is a simple image classification web app to predict letter")
 
 file = st.file_uploader("Please upload an image file", type=["jpg", "png"])
+
+def np_to_df(outputs):  # Create a 2D array for the dataframe instead of a 1D array
+    length = outputs.shape[0]  # Total outputs
+    arr = []
+    for pos in range(0, length):
+        line = [0]*26
+        line[pos] = outputs[pos]
+        arr.append(line)
+    return arr
 #
 if file is None:
     st.text("You haven't uploaded an image file(jpg or png)")
