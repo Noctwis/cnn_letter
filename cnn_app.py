@@ -10,6 +10,7 @@ def import_and_predict(image_data, model):
     
         size = (28,28)    
         image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
+        image = image.rotate(270)
         image = image.convert('RGB')
         image = np.asarray(image)
         image = (image.astype(np.float32) / 255.0)
@@ -19,7 +20,8 @@ def import_and_predict(image_data, model):
         res=np.argmax(prediction,axis=1) 
         
         
-        return res
+        return res 
+#mettre prediction a la place de res pour avoir les pourcentages
 
 model = tf.keras.models.load_model('cnn.h5')
 
@@ -95,3 +97,4 @@ else:
         st.write("")
 
     #st.write(prediction)
+#décocher cette ligne pour voir les pourcentages
