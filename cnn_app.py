@@ -96,8 +96,7 @@ else:
     image = Image.open(file)
     st.image(image, use_column_width=True)
     outputs = import_and_predict(image,model)
-     ind_max = np.where(outputs == max(outputs))[
-        0][0]  # Index of the max element
+    ind_max = np.where(outputs == max(outputs))[0][0]  # Index of the max element
     # Converting index to equivalent letter
     progress_bar = st.progress(0)
     for i in range(100):
