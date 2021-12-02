@@ -5,7 +5,7 @@ import tensorflow as tf
 import pandas as pd
 #import cv2
 
-model = tf.keras.models.load_model('model_O.h5')
+model = tf.keras.models.load_model('cnn.h5')
 
 def import_and_predict(image_data, model):
     
@@ -25,7 +25,7 @@ def import_and_predict(image_data, model):
         return res 
 #mettre prediction a la place de res pour avoir les pourcentages
 
-model = tf.keras.models.load_model('model_O.h5')
+model = tf.keras.models.load_model('cnn.h5')
 
 st.write("""
          # Letter prédiction
@@ -43,60 +43,80 @@ else:
     st.image(image, use_column_width=True)
     prediction = import_and_predict(image, model)
     
-    if np.argmax(prediction) == 0:
-        st.write("A")
-    elif np.argmax(prediction) == 1:
-        st.write("B")
-    elif np.argmax(prediction) == 2:
-        st.write("C")
-    elif np.argmax(prediction) == 3:
-        st.write("D")
-    elif np.argmax(prediction) == 4:
-        st.write("E")
-    elif np.argmax(prediction) == 5:
-        st.write("F")
-    elif np.argmax(prediction) == 6:
-        st.write("G")
-    elif np.argmax(prediction) == 7:
-        st.write("H")
-    elif np.argmax(prediction) == 8:
-        st.write("I")
-    elif np.argmax(prediction) == 9:
-        st.write("J")
-    elif np.argmax(prediction) == 10:
-        st.write("K")
-    elif np.argmax(prediction) == 11:
-        st.write("L")
-    elif np.argmax(prediction) == 12:
-        st.write("M")
-    elif np.argmax(prediction) == 13:
-        st.write("N")
-    elif np.argmax(prediction) == 14:
-        st.write("O")
-    elif np.argmax(prediction) == 15:
-        st.write("P")
-    elif np.argmax(prediction) == 16:
-        st.write("Q")
-    elif np.argmax(prediction) == 17:
-        st.write("R")
-    elif np.argmax(prediction) == 18:
-        st.write("S")
-    elif np.argmax(prediction) == 19:
-        st.write("T")
-    elif np.argmax(prediction) == 20:
-        st.write("U")
-    elif np.argmax(prediction) == 21:
-        st.write("V")
-    elif np.argmax(prediction) == 22:
-        st.write("W")
-    elif np.argmax(prediction) == 23:
-        st.write("X")
-    elif np.argmax(prediction) == 24:
-        st.write("Y")
-    elif np.argmax(prediction) == 25:
-        st.write("Z")
-    else:
-        st.write("")
+from numpy.core.defchararray import title
+import streamlit as st
+from streamlit_drawable_canvas import st_canvas
+from torch_utils import transform_image,  get_prediction
+from PIL import Image
+import numpy as np
+import pandas as pd
+import time
 
-    #st.write(prediction)
-#décocher cette ligne pour voir les pourcentages
+st.set_page_config(
+    page_title="Handwritten Letters Classifier",
+    page_icon=":pencil:",
+)
+
+
+hide_streamlit_style = """
+            <style>
+            # MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+st.title("Handwritten Letters Classifier")
+
+
+def predict(image):
+    image = Image.fromarray((image[:, :, 0]).astype(np.uint8))
+    image = image.resize((28, 28))
+    tensor = transform_image(image)
+    prediction = get_prediction(tensor)
+    return prediction
+
+
+def np_to_df(outputs):  # Create a 2D array for the dataframe instead of a 1D array
+    length = outputs.shape[0]  # Total outputs
+    arr = []
+    for pos in range(0, length):
+        line = [0]*26
+        line[pos] = outputs[pos]
+        arr.append(line)
+    return arr
+
+
+# Specify brush parameters and drawing mode
+stroke_width = st.sidebar.slider("Stroke width: ", 1, 100, 25)
+
+
+# Create a canvas component
+canvas_result = st_canvas(
+    stroke_width=stroke_width,
+    stroke_color="#fff",
+    background_color="#000",
+    height=280,
+    width=280,
+    drawing_mode="freedraw",
+    key="canvas",
+)
+
+result = st.button("Predict")
+
+if canvas_result.image_data is not None and result:
+    outputs = predict(canvas_result.image_data)
+    ind_max = np.where(outputs == max(outputs))[
+        0][0]  # Index of the max element
+    # Converting index to equivalent letter
+    progress_bar = st.progress(0)
+    for i in range(100):
+        progress_bar.progress(i + 1)
+        time.sleep(0.01)
+    st.markdown("<h3 style = 'text-align: center;'>Prediction : {}<h3>".format(
+        chr(97 + ind_max)), unsafe_allow_html=True)
+    chart_data = pd.DataFrame(np_to_df(outputs), index=[
+                              'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'], columns=[
+                              'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'])
+    st.bar_chart(chart_data)
+    st.balloons()
+    
