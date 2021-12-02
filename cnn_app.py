@@ -57,15 +57,17 @@ model = load_checkpoint('model.pth')
 def import_and_predict(image_data, model):
     
         size = (28,28)    
-        #image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
+        image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
+        image = image.convert('RGB')
+        image = np.asarray(image)
         #image2 = np.asarray(image)
-        image = image_data.fromarray((image[:, :, 0]).astype(np.uint8))
+        image = Image.fromarray((image[:, :, 0]).astype(np.uint8))
         image = image.resize((28, 28))
         #tensor = transform_image(image)
         #image = image.rotate(90)
-        #image = image.convert('RGB')
+        
         #image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-        #image = np.asarray(image)
+        
         #image = (image.astype(np.float32) / 255.0)
         image2_reshape = transform_image(image)
         #image2_reshape = image.reshape(-1,28,28,1)
