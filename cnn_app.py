@@ -88,7 +88,7 @@ if file is None:
 else:
     image = Image.open(file)
     st.image(image, use_column_width=True)
-    prediction = import_and_predict(image)
+    prediction = import_and_predict(image,model)
     
 
 
