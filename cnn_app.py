@@ -86,16 +86,9 @@ file = st.file_uploader("Please upload an image file", type=["jpg", "png"])
 if file is None:
     st.text("You haven't uploaded an image file(jpg or png)")
 else:
-    def predict(image):
-    image = Image.fromarray((image[:, :, 0]).astype(np.uint8))
-    image = image.resize((28, 28))
-    tensor = transform_image(image)
-    prediction = get_prediction(tensor)
-        return prediction
-
     image = Image.open(file)
     st.image(image, use_column_width=True)
-    prediction = predict(image)
+    prediction = import_and_predict(image)
     
 
 
