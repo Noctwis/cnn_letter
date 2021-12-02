@@ -3,7 +3,7 @@ import streamlit as st
 from PIL import Image, ImageOps
 import tensorflow as tf
 import pandas as pd
-import cv2
+#import cv2
 
 model = tf.keras.models.load_model('cnn.h5')
 
