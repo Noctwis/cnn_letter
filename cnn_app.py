@@ -57,11 +57,11 @@ def import_and_predict(image_data, model):
         image = (image.astype(np.float32) / 255.0)
         image2_reshape = image.reshape(-1,28,28,1)
 
-        prediction = model.predict(image2_reshape)
-        res=np.argmax(prediction,axis=1) 
+        prediction2 = get_prediction(tensor)
+        #res=np.argmax(prediction,axis=1) 
         
         
-        return res 
+        return prediction2
 #mettre prediction a la place de res pour avoir les pourcentages
 
 model = load_checkpoint('model.pth')
@@ -80,7 +80,7 @@ if file is None:
 else:
     image = Image.open(file)
     st.image(image, use_column_width=True)
-    prediction = import_and_predict(image, model)
+    prediction = predict(image)
     
 from numpy.core.defchararray import title
 import streamlit as st
