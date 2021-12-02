@@ -59,7 +59,7 @@ def import_and_predict(image_data, model):
         size = (28,28)    
         #image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
         #image2 = np.asarray(image)
-        image = image.fromarray((image[:, :, 0]).astype(np.uint8))
+        image = image_data.fromarray((image[:, :, 0]).astype(np.uint8))
         image = image.resize((28, 28))
         #tensor = transform_image(image)
         #image = image.rotate(90)
