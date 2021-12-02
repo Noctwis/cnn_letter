@@ -95,20 +95,20 @@ if file is None:
 else:
     image = Image.open(file)
     st.image(image, use_column_width=True)
-    outputs = import_and_predict(image,model)
-    ind_max = np.where(outputs == max(outputs))[0][0]  # Index of the max element
+#    outputs = import_and_predict(image,model)
+#    ind_max = np.where(outputs == max(outputs))[0][0]  # Index of the max element
     # Converting index to equivalent letter
-    progress_bar = st.progress(0)
-    for i in range(100):
-        progress_bar.progress(i + 1)
-        time.sleep(0.01)
-    st.markdown("<h3 style = 'text-align: center;'>Prediction : {}<h3>".format(
-        chr(97 + ind_max)), unsafe_allow_html=True)
-    chart_data = pd.DataFrame(np_to_df(outputs), index=[
-                              'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'], columns=[
-                              'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'])
-    st.bar_chart(chart_data)
-    st.balloons()
+#    progress_bar = st.progress(0)
+#    for i in range(100):
+#        progress_bar.progress(i + 1)
+#        time.sleep(0.01)
+#    st.markdown("<h3 style = 'text-align: center;'>Prediction : {}<h3>".format(
+#        chr(97 + ind_max)), unsafe_allow_html=True)
+#    chart_data = pd.DataFrame(np_to_df(outputs), index=[
+#                              'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'], columns=[
+#                              'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'])
+#    st.bar_chart(chart_data)
+#    st.balloons()
     
 
 
