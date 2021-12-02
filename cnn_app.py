@@ -10,7 +10,7 @@ def import_and_predict(image_data, model):
     
         size = (28,28)    
         image = ImageOps.fit(image_data, size, Image.ANTIALIAS)
-        image = image.rotate(270)
+        image = image.rotate(90)
         image = image.convert('RGB')
         image = np.asarray(image)
         image = (image.astype(np.float32) / 255.0)
