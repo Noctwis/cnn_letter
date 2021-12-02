@@ -60,4 +60,4 @@ def get_prediction(image_tensor):
     return outputs.squeeze().detach().numpy()
 
 
-PATH = 'app/model.pth'
+PATH = 'model.pth'
