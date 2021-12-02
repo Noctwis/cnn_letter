@@ -63,7 +63,8 @@ def import_and_predict(image_data, model):
         #image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
         image = np.asarray(image)
         image = (image.astype(np.float32) / 255.0)
-        image2_reshape = image.reshape(-1,28,28,1)
+        image2_reshape = transform_image(image)
+        #image2_reshape = image.reshape(-1,28,28,1)
 
         prediction2 = get_prediction(image2_reshape)
         #res=np.argmax(prediction,axis=1) 
